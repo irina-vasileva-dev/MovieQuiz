@@ -5,27 +5,39 @@ final class MovieQuizViewController: UIViewController {
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var counterLabel: UILabel!
     @IBOutlet private weak var textLabel: UILabel!
-
+    
+    @IBOutlet private weak var questionLabel: UILabel!
+    
+    @IBOutlet private weak var noButtonLabel: UIButton!
+    
+    @IBOutlet private weak var yesButtonLabel: UIButton!
+    
     private var currentQuestionIndex = 0
     private var correctAnswers = 0
-    
     
     private struct QuizQuestion {
         let image: String
         let question: String
         let correctAnswer: Bool
     }
-
+    
     private struct QuizStepViewModel {
-      let image: UIImage
-      let question: String
-      let questionNumber: String
+        let image: UIImage
+        let question: String
+        let questionNumber: String
+    }
+    
+    private func setFonts() {
+        guard UIFont(name: "YSDisplay-Bold", size: 23) != nil else {
+            textLabel.font = UIFont.boldSystemFont(ofSize: 23)
+            return
+        }
     }
     
     private struct QuizResultsViewModel {
-      let title: String
-      let text: String
-      let buttonText: String
+        let title: String
+        let text: String
+        let buttonText: String
     }
     
     private let questions: [QuizQuestion] = [
@@ -96,9 +108,10 @@ final class MovieQuizViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setFonts()
         showFirstQuestion()
     }
-      
+    
     private func showFirstQuestion() {
         let firstQuestion = questions[currentQuestionIndex]
         let viewModel = convert(model: firstQuestion)
@@ -114,10 +127,10 @@ final class MovieQuizViewController: UIViewController {
     }
     
     private func show(quiz step: QuizStepViewModel) {
-      imageView.layer.borderWidth = 0
-      imageView.image = step.image
-      textLabel.text = step.question
-      counterLabel.text = step.questionNumber
+        imageView.layer.borderWidth = 0
+        imageView.image = step.image
+        textLabel.text = step.question
+        counterLabel.text = step.questionNumber
     }
     
     private func showAnswerResult(isCorrect: Bool) {
@@ -151,7 +164,7 @@ final class MovieQuizViewController: UIViewController {
         }
     }
     
-        private func show(quiz result: QuizResultsViewModel) {
+    private func show(quiz result: QuizResultsViewModel) {
         let alert = UIAlertController(
             title: result.title,
             message: result.text,

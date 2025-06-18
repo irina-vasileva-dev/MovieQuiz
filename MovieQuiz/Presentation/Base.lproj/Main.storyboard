@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_9" orientation="portrait" appearance="dark"/>
+    <device id="retina6_3" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
@@ -14,23 +14,31 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MovieQuizViewController" customModule="MovieQuiz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Cx0-HC-9FE" userLabel="Up Stack View">
-                                <rect key="frame" x="20" y="72" width="400" height="785"/>
+                                <rect key="frame" x="20" y="72" width="362" height="708"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qCN-nK-2LB">
-                                        <rect key="frame" x="0.0" y="0.0" width="400" height="23.666666666666668"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="362" height="23.666666666666668"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вопрос:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjz-SH-SZi" userLabel="Question Title Label">
-                                                <rect key="frame" x="0.0" y="0.0" width="364" height="23.666666666666668"/>
-                                                <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="20"/>
-                                                <color key="textColor" name="YP White"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjz-SH-SZi" userLabel="Question Title Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="326" height="23.666666666666668"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Вопрос:">
+                                                        <attributes>
+                                                            <color key="NSColor" name="YP White"/>
+                                                            <font key="NSFont" size="20" name="YSDisplay-Medium"/>
+                                                            <font key="NSOriginalFont" size="20" name="XcodeDigits"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="1/10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHS-wR-Dtv">
-                                                <rect key="frame" x="364" y="0.0" width="36" height="23.666666666666668"/>
+                                                <rect key="frame" x="326" y="0.0" width="36" height="23.666666666666668"/>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="20"/>
                                                 <color key="textColor" name="YP White"/>
                                                 <nil key="highlightedColor"/>
@@ -38,25 +46,37 @@
                                         </subviews>
                                     </stackView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="G9K-vj-tXK" userLabel="Preview Image">
-                                        <rect key="frame" x="0.0" y="43.666666666666686" width="400" height="600"/>
+                                        <rect key="frame" x="0.0" y="43.666666666666686" width="362" height="543"/>
                                         <color key="backgroundColor" name="YP White"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="G9K-vj-tXK" secondAttribute="height" multiplier="2:3" id="dFA-44-1zx"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг этого фильма больше 6?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dr4-lc-cgj" userLabel="Question Label">
-                                        <rect key="frame" x="0.0" y="663.66666666666663" width="400" height="121.33333333333337"/>
-                                        <fontDescription key="fontDescription" name="YSDisplay-Bold" family="YS Display" pointSize="23"/>
-                                        <color key="textColor" name="YP White"/>
-                                        <nil key="highlightedColor"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dr4-lc-cgj" userLabel="Question Label">
+                                        <rect key="frame" x="0.0" y="606.66666666666663" width="362" height="101.33333333333337"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Рейтинг этого фильма больше чем 6?">
+                                                <attributes>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="23" name="YSDisplay-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </label>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="li4-jy-sin">
-                                <rect key="frame" x="20" y="862" width="400" height="60"/>
+                                <rect key="frame" x="20" y="780" width="362" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1e-XF-6uJ" userLabel="No button">
-                                        <rect key="frame" x="0.0" y="0.0" width="190" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="171" height="60"/>
                                         <color key="backgroundColor" name="YP White"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="o6B-fp-aup"/>
@@ -77,7 +97,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hh5-n3-SUZ" userLabel="Yes button">
-                                        <rect key="frame" x="210" y="0.0" width="190" height="60"/>
+                                        <rect key="frame" x="191" y="0.0" width="171" height="60"/>
                                         <color key="backgroundColor" name="YP White"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="Uk1-4q-hYv"/>
@@ -103,7 +123,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
-                            <constraint firstItem="Cx0-HC-9FE" firstAttribute="bottom" secondItem="li4-jy-sin" secondAttribute="top" constant="-5" id="2Br-m4-ND9"/>
+                            <constraint firstItem="Cx0-HC-9FE" firstAttribute="bottom" secondItem="li4-jy-sin" secondAttribute="top" id="2Br-m4-ND9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="li4-jy-sin" secondAttribute="bottom" id="6x0-1S-L9o"/>
                             <constraint firstItem="li4-jy-sin" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="9YH-Zg-FeD"/>
                             <constraint firstItem="Cx0-HC-9FE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="JRe-A3-7r4"/>
@@ -116,7 +136,10 @@
                     <connections>
                         <outlet property="counterLabel" destination="HHS-wR-Dtv" id="WOP-BI-eaG"/>
                         <outlet property="imageView" destination="G9K-vj-tXK" id="2y0-pO-oX9"/>
+                        <outlet property="noButtonLabel" destination="W1e-XF-6uJ" id="JMW-BL-GHb"/>
+                        <outlet property="questionLabel" destination="kjz-SH-SZi" id="e3i-vX-y92"/>
                         <outlet property="textLabel" destination="dr4-lc-cgj" id="3Dd-ga-QCy"/>
+                        <outlet property="yesButtonLabel" destination="Hh5-n3-SUZ" id="xeC-RA-UoG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

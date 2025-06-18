@@ -4,13 +4,13 @@
 <dict>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
-		<key>UIAppFonts</key>
-		<array>
-			<string>YS Display-Bold.ttf</string>
-			<string>YS Display-Medium.ttf</string>
-		</array>
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
+        <key>UIAppFonts</key>
+        <array>
+            <string>YSDisplay-Bold.ttf</string>
+            <string>YSDisplay-Medium.ttf</string>
+        </array>
 		<key>UISceneConfigurations</key>
 		<dict>
 			<key>UIWindowSceneSessionRoleApplication</key>
