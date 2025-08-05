@@ -68,7 +68,7 @@
                                         <rect key="frame" x="0.0" y="606.66666666666663" width="362" height="81.333333333333371"/>
                                         <color key="tintColor" name="YP White"/>
                                         <attributedString key="attributedText">
-                                            <fragment content="Рейтинг этого фильма                меньше чем 5?">
+                                            <fragment content="Рейтинг этого фильма меньше чем 5?">
                                                 <attributes>
                                                     <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <font key="NSFont" size="23" name="YSDisplay-Bold"/>
