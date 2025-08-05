@@ -3,17 +3,14 @@ import UIKit
 final class MovieQuizViewController: UIViewController {
     
     @IBOutlet private weak var imageView: UIImageView!
-    @IBOutlet private weak var counterLabel: UILabel!
+    @IBOutlet private weak var questionIndexLabel: UILabel!
     @IBOutlet private weak var textLabel: UILabel!
-    
-    @IBOutlet private weak var questionLabel: UILabel!
-    
-    @IBOutlet private weak var noButtonLabel: UIButton!
-    
-    @IBOutlet private weak var yesButtonLabel: UIButton!
-    
+    @IBOutlet private weak var questionTitleLabel: UILabel!
+    @IBOutlet private weak var noButton: UIButton!
+    @IBOutlet private weak var yesButton: UIButton!
     private var currentQuestionIndex = 0
     private var correctAnswers = 0
+    private var isButtonsEnabled = true
     
     private struct QuizQuestion {
         let image: String
@@ -27,13 +24,6 @@ final class MovieQuizViewController: UIViewController {
         let questionNumber: String
     }
     
-    private func setFonts() {
-        guard UIFont(name: "YSDisplay-Bold", size: 23) != nil else {
-            textLabel.font = UIFont.boldSystemFont(ofSize: 23)
-            return
-        }
-    }
-    
     private struct QuizResultsViewModel {
         let title: String
         let text: String
@@ -43,56 +33,59 @@ final class MovieQuizViewController: UIViewController {
     private let questions: [QuizQuestion] = [
         QuizQuestion(
             image: "The Godfather",
-            question: "Рейтинг этого фильма больше чем 6?",
+            question: "Рейтинг этого фильма \nбольше чем 6?",
             correctAnswer: true),
         
         QuizQuestion(
             image: "The Dark Knight",
-            question: "Рейтинг этого фильма больше чем 6?",
+            question: "Рейтинг этого фильма \nбольше чем 6?",
             correctAnswer: true),
         
         QuizQuestion(
             image: "Kill Bill",
-            question: "Рейтинг этого фильма больше чем 6?",
+            question: "Рейтинг этого фильма \nбольше чем 6?",
             correctAnswer: true),
         
         QuizQuestion(
             image: "The Avengers",
-            question: "Рейтинг этого фильма больше чем 6?",
+            question: "Рейтинг этого фильма \nбольше чем 6?",
             correctAnswer: true),
         
         QuizQuestion(
             image: "Deadpool",
-            question: "Рейтинг этого фильма больше чем 6?",
+            question: "Рейтинг этого фильма \nбольше чем 6?",
             correctAnswer: true),
         
         QuizQuestion(
             image: "The Green Knight",
-            question: "Рейтинг этого фильма больше чем 6?",
+            question: "Рейтинг этого фильма \nбольше чем 6?",
             correctAnswer: true),
         
         QuizQuestion(
             image: "Old",
-            question: "Рейтинг этого фильма больше чем 6?",
+            question: "Рейтинг этого фильма \nбольше чем 6?",
             correctAnswer: false),
         
         QuizQuestion(
             image: "The Ice Age Adventures of Buck Wild",
-            question: "Рейтинг этого фильма больше чем 6?",
+            question: "Рейтинг этого фильма \nбольше чем 6?",
             correctAnswer: false),
         
         QuizQuestion(
             image: "Tesla",
-            question: "Рейтинг этого фильма больше чем 6?",
+            question: "Рейтинг этого фильма \nбольше чем 6?",
             correctAnswer: false),
         
         QuizQuestion(
             image: "Vivarium",
-            question: "Рейтинг этого фильма больше чем 6?",
+            question: "Рейтинг этого фильма \nбольше чем 6?",
             correctAnswer: false)
     ]
     
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
+        guard isButtonsEnabled else { return }
+        setButtonsEnabled(false)
+        
         let currentQuestion = questions[currentQuestionIndex]
         let givenAnswer = true
         
@@ -100,15 +93,28 @@ final class MovieQuizViewController: UIViewController {
     }
     
     @IBAction private func noButtonClicked(_ sender: UIButton) {
+        guard isButtonsEnabled else { return }
+        setButtonsEnabled(false)
+        
         let currentQuestion = questions[currentQuestionIndex]
         let givenAnswer = false
         
         showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
     }
     
+    private func setButtonsEnabled(_ enabled: Bool) {
+        isButtonsEnabled = enabled
+        
+        UIView.animate(withDuration: 0.3) {
+            self.yesButton.alpha = enabled ? 1.0 : 0.5
+            self.noButton.alpha = enabled ? 1.0 : 0.5
+            self.yesButton.isEnabled = enabled
+            self.noButton.isEnabled = enabled
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setFonts()
         showFirstQuestion()
     }
     
@@ -130,7 +136,9 @@ final class MovieQuizViewController: UIViewController {
         imageView.layer.borderWidth = 0
         imageView.image = step.image
         textLabel.text = step.question
-        counterLabel.text = step.questionNumber
+        questionIndexLabel.text = step.questionNumber
+        
+        setButtonsEnabled(true)
     }
     
     private func showAnswerResult(isCorrect: Bool) {
@@ -182,5 +190,4 @@ final class MovieQuizViewController: UIViewController {
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
-    
 }
