@@ -1,6 +1,6 @@
 import Foundation
 
-class QuestionFactory: QuestionFactoryProtocol {
+final class QuestionFactory: QuestionFactoryProtocol {
 
     //MARK: - Public Properties
     weak var delegate: QuestionFactoryDelegate?
