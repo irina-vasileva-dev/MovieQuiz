@@ -1,7 +1,7 @@
 import Foundation
 
-struct QuizQuestion: Hashable {
-    let image: String
-    let question: String
+struct QuizQuestion : Hashable {
+    let image: Data
+    let text: String
     let correctAnswer: Bool
 }

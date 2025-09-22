@@ -10,6 +10,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     @IBOutlet private weak var questionTitleLabel: UILabel!
     @IBOutlet private weak var noButton: UIButton!
     @IBOutlet private weak var yesButton: UIButton!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Private Properties
     
@@ -43,6 +44,19 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
             self?.displayQuestion(question)
         }
     }
+    
+    func didLoadDataFromServer() {
+        DispatchQueue.main.async { [weak self] in
+            self?.activityIndicator.isHidden = true
+            self?.questionFactory?.requestNextQuestion()
+        }
+    }
+
+    func didFailToLoadData(with error: Error) {
+        DispatchQueue.main.async { [weak self] in
+            self?.showNetworkError(message: "Невозможно загрузить данные")
+        }
+    }
 
     // MARK: - AlertPresenterDelegate
     
@@ -55,7 +69,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         super.viewDidLoad()
         configureAppearance()
         setupServices()
-        showFirstQuestion()
+        showLoadingIndicator()
+        questionFactory?.loadData()
     }
     
     // MARK: - Configuration
@@ -89,15 +104,19 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     }
     
     private func setupServices() {
-        let factory = QuestionFactory()
-        factory.delegate = self
-        questionFactory = factory
+        questionFactory = QuestionFactory(
+            moviesLoader: MoviesLoader(),
+            delegate: self
+        )
         
         let presenter = AlertPresenter()
         presenter.delegate = self
         alertPresenter = presenter
         
         statisticService = StatisticService()
+        
+        showLoadingIndicator()
+        questionFactory?.loadData()
     }
     
     // MARK: - Game Flow
@@ -174,13 +193,10 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     }
     
     private func convert(model: QuizQuestion) -> QuizStepModel {
-        // Исправляем отображение номера вопроса - currentQuestionIndex уже увеличился
-        let questionNumber = currentQuestionIndex + 1
         return QuizStepModel(
-            image: UIImage(named: model.image) ?? UIImage(),
-            question: model.question,
-            questionNumber: "\(questionNumber)/\(questionsAmount)"
-        )
+            image: UIImage(data: model.image) ?? UIImage(),
+            question: model.text,
+            questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)")
     }
     
     private func showFinalResults() {
@@ -212,11 +228,41 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         )
         
         self.alertModel = alertModel
-        alertPresenter?.presentAlert()
+        alertPresenter?.presentAlert(model: alertModel)
+    }
+    
+    private func showLoadingIndicator() {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+    }
+    
+    private func showNetworkError(message: String) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            self.activityIndicator.isHidden = true
+            self.activityIndicator.stopAnimating()
+            
+            let model = AlertModel(
+                title: "Что-то пошло не так(",
+                message: message,
+                buttonText: "Попробовать еще раз"
+            ) { [weak self] in
+                guard let self = self else { return }
+                
+                self.currentQuestionIndex = 0
+                self.correctAnswers = 0
+                self.showQuestions = []
+                self.showLoadingIndicator()
+                self.questionFactory?.loadData()
+            }
+            
+            self.alertPresenter?.presentAlert(model: model)
+        }
     }
     
     // MARK: - IB Actions
-    
+
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
         handleAnswer(true)
     }

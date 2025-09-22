@@ -1,2 +1,0 @@
-file:///Users/aleeex_grin/Library/Fonts/YS%20Display-Medium.ttf#postscript-name=YSDisplay-Medium
-file:///Users/aleeex_grin/Library/Fonts/YS%20Display-Bold.ttf#postscript-name=YSDisplay-Bold
