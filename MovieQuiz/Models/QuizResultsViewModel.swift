@@ -1,6 +1,6 @@
 import Foundation
 
-struct QuizResultsModel {
+struct QuizResultsViewModel {
     let title: String
     let text: String
     let buttonText: String
